@@ -1,0 +1,26 @@
+const int soilPin = A0;
+const int relayPin = D1; 
+const int threshold = 20;
+void setup() {
+ pinMode(relayPin, OUTPUT);
+ pinMode(soilPin, INPUT);
+ Serial.begin(9600);
+ digitalWrite(relayPin, HIGH);
+}
+void loop() {
+ int sensorValue = analogRead(soilPin);
+ int soilMoisture = map(sensorValue, 1023, 0, 0, 100);
+ 
+ Serial.print("Nilai Analog: ");
+ Serial.print(sensorValue);
+ Serial.print(" | Kelembaban Tanah: ");
+ Serial.print(soilMoisture);
+ Serial.println("%");
+ // Logika kontrol relay
+ if (soilMoisture > threshold) {
+ digitalWrite(relayPin, HIGH);
+ } else {
+ digitalWrite(relayPin, LOW);
+ }
+ delay(500);
+}
