@@ -1,0 +1,25 @@
+const int soilPin = A0;
+const int threshold = 20;
+const int basah = 50;
+void setup() {
+ Serial.begin(9200);
+ pinMode(soilPin, INPUT);
+}
+void loop() {
+ int sensorValue = analogRead(soilPin);
+ int soilMoisture = map(sensorValue, 1023, 0, 0, 100); 
+ String Status;
+ if (soilMoisture > basah) {
+  Status = "Basah";
+ } else if (Basah > soilMoisture > threshold) { // Tanah sedang
+  Status = "Sedang";
+ } else {Status = "Kering"}
+ Serial.print("Nilai Analog: ");
+ Serial.print(sensorValue);
+ Serial.print(" | Kelembaban Tanah: ");
+ Serial.print(soilMoisture);
+ Serial.print("%");
+ Serial.print(" | Status: ")
+ Serial.println(Status) 
+ delay(1000);
+}
